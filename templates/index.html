@@ -5,24 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles.css">
     <title>Sentiment Catalysis</title>
 </head>
 
 <body>
-    <h1>Welcome</h1>
-    <p>How are you feeling today?</p>
-    <form action="/" method="POST">
-        <textarea name="feedback"></textarea>
-        <input type="submit" value="Submit">
-    </form>
+    <div class="container">
+        <div class="left-section">
+            <h1>Welcome</h1>
+            <p>How are you feeling today?</p>
+            <form action="/" method="POST">
+                <textarea name="feedback"></textarea>
+                <input type="submit" value="Submit">
+            </form>
 
-    <div id="result">
-        {% if result %}
-        <p>Prediction: {{ result }}</p>
-        {% endif %}
+        </div>
+        <div class="right-section">
+            <div id="img-section">
+                <img src="">
+            </div>
+            <div id="result">
+                {% if result %}
+                <p>Prediction: {{ result }}</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
-    <div id="img-section"></div>
 
     <script>
         // Get the form, result, and cat-images elements
@@ -35,6 +44,7 @@
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            // Get the value
             // Get the value of the feedback textarea
             const feedback = form.querySelector('textarea').value;
 
@@ -53,16 +63,17 @@
                     // Extract the prediction property
                     const prediction = data.prediction;
                     // Update the result element with the prediction
+
                     if (prediction === 'negative') {
                         fetch('https://api.thecatapi.com/v1/images/search')
                             .then(res => res.json())
                             .then(data => {
-                                let img = document.createElement('img');
-                                img.src = data[0].url;
-                                document.getElementById("img-section").appendChild(img);
+                                document.querySelector('#img-section img').src = data[0].url;
                             });
-                    } else {
-                        result.innerHTML = `<p>Prediction: ${prediction}</p>`;
+                    } else if (prediction === 'positive') {
+                        result.innerHTML = `<p>😊</p>`;
+                    } else if (prediction === 'neutral') {
+                        result.innerHTML = `<p>😐</p>`;
                     }
                 });
 

@@ -1,0 +1,76 @@
+form,
+h1,
+p {
+  text-align: center;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+form {
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+textarea {
+  width: 100%;
+  height: 200px;
+  padding: 12px 20px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #f8f8f8;
+  resize: none;
+}
+
+input[type="submit"] {
+  width: 150px;
+  height: 50px;
+  margin-top: 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#result {
+  text-align: center;
+  margin-top: 50px;
+}
+/* Style the result and cat image section */
+#result,
+#img-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+#img-section {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#img-section img {
+  width: 50%;
+}
+
+.container {
+  display: flex;
+}
+
+.left-section {
+  flex: 1;
+}
+
+.right-section {
+  flex: 1;
+}
