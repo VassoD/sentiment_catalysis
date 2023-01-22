@@ -43,18 +43,10 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-#result {
-  text-align: center;
-  margin-top: 50px;
-}
-/* Style the result and cat image section */
 #result,
 #img-section {
   display: flex;
   justify-content: space-between;
-}
-
-#img-section {
   text-align: center;
   margin-top: 50px;
 }
