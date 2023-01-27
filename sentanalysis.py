@@ -1,11 +1,10 @@
 # Description: Sentiment Analysis with Coherence
 
-from flask import Flask, render_template, request
-from flask import jsonify
+from flask import Flask, render_template, request, jsonify
 import cohere
 from cohere.classify import Example
 from config import API_KEY
-
+import os
 app = Flask(__name__)
 co = cohere.Client(API_KEY)
 
@@ -15,30 +14,12 @@ def index():
     if request.method == 'POST':
         data = request.get_json()
         feedback = data['feedback']
-        examples = [
-            Example("The order came 5 days early", "positive"),
-            Example("The item exceeded my expectations", "positive"),
-            Example("I ordered more for my friends", "positive"),
-            Example("I would buy this again", "positive"),
-            Example("I like the product", "positive"),
-            Example("It was good", "positive"),
-            Example("I would recommend this to others", "positive"),
-            Example("The package was damaged", "negative"),
-            Example("The order is 5 days late", "negative"),
-            Example("The order was incorrect", "negative"),
-            Example("I want to return my item", "negative"),
-            Example("The item\'s material feels low quality", "negative"),
-            Example("The product was okay", "neutral"),
-            Example("I received five items in total", "neutral"),
-            Example("I bought it from the website", "neutral"),
-            Example("I used the product this morning", "neutral"),
-            Example("The product arrived yesterday", "neutral"),
-        ]
         inputs = [feedback]
         response = co.classify(
-            model='large',
+            # model='de75337f-360c-41a7-a07a-ddcc026f6a2e-ft',
+            model='edf20e4f-1466-4000-a319-4f008c3d7b7f-ft',
             inputs=inputs,
-            examples=examples,
+            # examples=examples,
         )
         for classification in response.classifications:
             prediction = classification.prediction

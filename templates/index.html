@@ -10,7 +10,14 @@
 </head>
 
 <body>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="correct-audio.html">Correct Audio</a></li>
+        </ul>
+    </nav>
     <div class="container">
+
         <div class="left-section">
             <h1>Welcome</h1>
             <p>How are you feeling today?</p>
@@ -31,53 +38,18 @@
             </div>
         </div>
     </div>
-
-
-    <script>
-        // Get the form, result, and cat-images elements
-        const form = document.querySelector('form');
-        const result = document.querySelector('#result');
-        const catImages = document.querySelector('#cat-images');
-
-
-        // Add a submit event listener to the form
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // Get the value of the feedback textarea
-            const feedback = form.querySelector('textarea').value;
-
-            // Send a POST request to the server with the feedback data
-            fetch('/', {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        feedback
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                })
-                .then(res => res.json())
-                .then(data => {
-                    // Extract the prediction property
-                    const prediction = data.prediction;
-                    // Update the result element with the prediction
-
-                    if (prediction === 'negative') {
-                        fetch('https://api.thecatapi.com/v1/images/search')
-                            .then(res => res.json())
-                            .then(data => {
-                                document.querySelector('#img-section img').src = data[0].url;
-                            });
-                    } else if (prediction === 'positive') {
-                        result.innerHTML = `<p>😊</p>`;
-                    } else if (prediction === 'neutral') {
-                        result.innerHTML = `<p>😐</p>`;
-                    }
-                });
-
-        });
-    </script>
+    <div id="speechrecog">
+        <p>🗣️</p>
+        <button id="startBtn" onclick="startRecognition()">Start</button>
+        <button id="stopBtn" onclick="stopRecognition()">Stop</button>
+        <div id="transcription"></div>
+    </div>
+    <!-- <form id="text-form">
+        <label for="input-text">Incorrect transcription:</label>
+        <textarea id="input-text"></textarea>
+        <input type="submit" value="Submit">
+      </form> -->
+    <script src="../static/main.js"></script>
 </body>
 
 </html>
